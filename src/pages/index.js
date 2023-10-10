@@ -19,7 +19,7 @@ export default function Home({ algorithms }) {
     })
     const newhash = await res.json()
     if (newhash.ApiError) {
-      setApiError(ApiError)
+      setApiError(newhash.ApiError)
       return
     }
     setApiError(false)
