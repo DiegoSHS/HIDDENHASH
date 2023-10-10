@@ -14,6 +14,8 @@ export default function handler(req, res) {
     console.log(hashResult)
     res.status(200).json(hashResult)
   } catch (error) {
-    res.status(500).json({ msj: `algo salió mal al realizar el hashing ${error.message}` })
+    const sendError = { ApiError: `algo salió mal al realizar el hashing ${error.message}` }
+    console.log(sendError)
+    res.status(500).json(sendError)
   }
 }

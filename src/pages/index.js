@@ -18,6 +18,11 @@ export default function Home({ algorithms }) {
       method: 'POST'
     })
     const newhash = await res.json()
+    if (newhash.ApiError) {
+      setApiError(ApiError)
+      return
+    }
+    setApiError(false)
     setHashes([newhash, ...hashes])
   }
   const setHash = (e, data) => setHashType(data.value)
@@ -25,12 +30,13 @@ export default function Home({ algorithms }) {
   const [text, setText] = useState('')
   const [openModal, setOpenModal] = useState(false)
   const [error, setError] = useState(false)
+  const [apiError, setApiError] = useState(false)
   const [viewmode, setViewMode] = useState(false)
   const [hashType, setHashType] = useState('sha256')
   return (
     <>
       <Head>
-        <title>Create Next App</title>
+        <title>Generador de hash</title>
         <meta name="description" content="Hash app" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
@@ -128,6 +134,13 @@ export default function Home({ algorithms }) {
               <Button active content='Convertir' color='blue' onClick={sendtext} />
             </Menu.Item>
             <Menu.Menu position='right'>
+              {
+                apiError ? (
+                  <Menu.Item
+                    content='Error al convertir' color='red' disabled active icon='close'
+                  />
+                ) : ''
+              }
               <Menu.Item
                 content='limpiar' color='red' active icon='trash alternate outline' onClick={(e) => {
                   e.preventDefault()
