@@ -49,6 +49,7 @@ export const HashTextCard = ({ element: { hash, algorithm, original, _id }, inde
             success: { icon: false }
         })
     }
+
     return (
         <Card key={index} sx={{ background: 'transparent', maxWidth: '85vw' }}>
             <CardHeader
