@@ -7,12 +7,12 @@ import { StoredContext } from '@/context/context'
 export const LockerCards = ({ lockers }) => {
     if (lockers.length === 0) return ('')
     return (
-        lockers.map((e,i) => <LockerCard element={e} index={i} />)
+        lockers.map((e, i) => <LockerCard element={e} key={i} />)
     )
 }
 
 
-export const LockerCard = ({ element: { encrypted, name, email }, index }) => {
+export const LockerCard = ({ element: { encrypted, name, email } }) => {
     const [visible, setVisible] = useState(true)
     const { setStored } = StoredContext()
     const handleVisible = () => {
@@ -23,7 +23,7 @@ export const LockerCard = ({ element: { encrypted, name, email }, index }) => {
         setStored({ dialog: true })
     }
     return (
-        <Card key={index} sx={{ background: 'transparent', minWidth: '30vw', maxWidth: '85vw' }}>
+        <Card sx={{ background: 'transparent', minWidth: '30vw', maxWidth: '85vw' }}>
             <CardHeader
                 title={name}
                 subheader={`Dueño: ${email}`}

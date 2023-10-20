@@ -12,11 +12,11 @@ export const copy = async (text) => {
 export const HashTextCards = ({ hashes }) => {
     if (hashes.length === 0) return ('')
     return (
-        hashes.map((e, i) => <HashTextCard element={e} index={i}></HashTextCard>)
+        hashes.map((e, i) => <HashTextCard element={e} key={i}></HashTextCard>)
     )
 }
 
-export const HashTextCard = ({ element: { hash, algorithm, original, _id }, index }) => {
+export const HashTextCard = ({ element: { hash, algorithm, original, _id } }) => {
     const [saved, setSaved] = useState(0)
     const { memory: { user: { email }, storedHashes }, setStored } = StoredContext()
     const handleSave = async () => {
@@ -51,7 +51,7 @@ export const HashTextCard = ({ element: { hash, algorithm, original, _id }, inde
     }
 
     return (
-        <Card key={index} sx={{ background: 'transparent', maxWidth: '85vw' }}>
+        <Card sx={{ background: 'transparent', maxWidth: '85vw' }}>
             <CardHeader
                 title={original}
                 subheader={algorithm}
