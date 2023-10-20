@@ -1,5 +1,5 @@
 {
-  "name": "hasher",
+  "name": "hiddenhash",
   "version": "0.1.0",
   "private": true,
   "scripts": {
@@ -9,11 +9,17 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@emotion/react": "^11.11.1",
+    "@emotion/styled": "^11.11.0",
+    "@fontsource/roboto": "^5.0.8",
+    "@mui/icons-material": "^5.14.14",
+    "@mui/material": "^5.14.14",
+    "mongodb": "^6.1.0",
     "next": "13.5.4",
+    "next-auth": "^4.24.3",
     "react": "^18",
     "react-dom": "^18",
-    "semantic-ui-css": "^2.5.0",
-    "semantic-ui-react": "^2.1.4"
+    "react-hot-toast": "^2.4.1"
   },
   "devDependencies": {
     "eslint": "^8",
