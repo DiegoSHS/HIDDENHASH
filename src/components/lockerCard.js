@@ -11,7 +11,6 @@ export const LockerCards = ({ lockers }) => {
     )
 }
 
-
 export const LockerCard = ({ element: { encrypted, name, email, _id } }) => {
     const [visible, setVisible] = useState(true)
     const { setStored } = StoredContext()
@@ -28,7 +27,6 @@ export const LockerCard = ({ element: { encrypted, name, email, _id } }) => {
     }
     return (
         <Card sx={{ background: 'transparent' }}>
-
             <CardHeader
                 title={name}
                 subheader={`Dueño: ${email}`}
