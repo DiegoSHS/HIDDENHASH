@@ -1,9 +1,8 @@
 import { StoredContext } from "@/context/context"
-import { AccountCircle } from "@mui/icons-material"
-import { AppBar, Avatar, Box, Button, Chip, Container, IconButton, ListItemIcon, Menu, MenuItem, Toolbar, Typography } from "@mui/material"
+import { AccountCircle, Tag } from "@mui/icons-material"
+import { AppBar, Avatar, Button, Chip, Container, IconButton, Toolbar } from "@mui/material"
 import { signIn } from "next-auth/react"
 import Link from "next/link"
-import { useState } from "react"
 
 const AccountButton = ({ user }) => {
     return (!user.name ? (
