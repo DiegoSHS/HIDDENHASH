@@ -28,6 +28,7 @@ export const LockerCard = ({ element: { encrypted, name, email, _id } }) => {
     }
     return (
         <Card sx={{ background: 'transparent' }}>
+
             <CardHeader
                 title={name}
                 subheader={`Dueño: ${email}`}
