@@ -1,15 +1,25 @@
-import { Container, Grid } from "semantic-ui-react";
+import { TopBarScroll } from '@/components/topBar'
+import { Context } from '@/context/context'
+import { Container, CssBaseline, ThemeProvider, createTheme } from '@mui/material'
+import { Toaster } from 'react-hot-toast'
 
-export default function Layout({children}){
+const darkTheme = createTheme({
+    palette: { mode: 'dark', background: { default: '5c5c5c' }, primary: { main: '#FFFFFF' } }
+})
+
+export default function Layout({ children }) {
+
     return (
-        <Grid columns={1}>
-            <Container fluid style={{ marginTop: "5vh" }} >
-                <Grid container stretched inverted centered columns={1}>
-                    <Grid.Column textAlign="center" verticalAlign='middle'>
-                        {children}
-                    </Grid.Column>
-                </Grid>
-            </Container>
-        </Grid>
+        <Context>
+            <ThemeProvider theme={darkTheme}>
+                <CssBaseline enableColorScheme />
+                <Toaster position='bottom-right'/>
+                <Container sx={{ my: 10, display: 'flex', flexDirection: 'column', alignItems: 'center' }} fixed component='main' maxWidth='sm'>
+                    <title>UXRATE</title>
+                    <TopBarScroll />
+                    {children}
+                </Container>
+            </ThemeProvider>
+        </Context>
     )
 }
