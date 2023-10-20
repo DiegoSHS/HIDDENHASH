@@ -51,7 +51,7 @@ export const HashTextCard = ({ element: { hash, algorithm, original, _id } }) =>
     }
 
     return (
-        <Card sx={{ background: 'transparent', maxWidth: '85vw' }}>
+        <Card sx={{ background: 'transparent', minWidth: '30vw', maxWidth: '85vw' }}>
             <CardHeader
                 title={original}
                 subheader={algorithm}

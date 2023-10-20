@@ -15,7 +15,7 @@ export default function Layout({ children }) {
                 <CssBaseline enableColorScheme />
                 <Toaster position='bottom-right'/>
                 <Container sx={{ my: 10, display: 'flex', flexDirection: 'column', alignItems: 'center' }} fixed component='main' maxWidth='sm'>
-                    <title>UXRATE</title>
+                    <title>HIDDEN HASH</title>
                     <TopBarScroll />
                     {children}
                 </Container>
