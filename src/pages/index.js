@@ -11,7 +11,7 @@ export default function Home() {
         en esta web podrás encriptar los textos que quieras, también podrás guardarlos e incluso compartirlos con otros usuarios
       </Typography>
       <Box>
-        <Link href={'/createhash'} passHref legacyBehavior>
+        <Link href={'/hash'} passHref legacyBehavior>
           <Button sx={{ m: 2 }} variant="contained" color="primary" style={{ background: 'white' }}>
             Comenzar
           </Button>

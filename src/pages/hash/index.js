@@ -69,7 +69,7 @@ export default function Createhash({ algorithms }) {
                         value={algorithm}
                         label="Algoritmo"
                     >
-                        {algorithms.map(e => <MenuItem value={e}>{e}</MenuItem>)}
+                        {algorithms.map((e, i) => <MenuItem key={i} value={e}>{e}</MenuItem>)}
                     </Select>
                 </FormControl>
                 <Button
