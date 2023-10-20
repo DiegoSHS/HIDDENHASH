@@ -8,7 +8,7 @@ export default function Home() {
         Una app para encriptar textos y guardarlos
       </Typography>
       <Typography align="center" sx={{ mt: 5 }}>
-        en esta web podrás encriptar los textos que quieras, también podrás guardarlos e incluso compartirlos con otros usuarios
+        en esta web podrás encriptar los textos que quieras y también podrás guardarlos
       </Typography>
       <Box>
         <Link href={'/hash'} passHref legacyBehavior>
@@ -16,7 +16,7 @@ export default function Home() {
             Comenzar
           </Button>
         </Link>
-        <Link href={'https://github.com/DiegoSHS/UXRATE'} passHref legacyBehavior>
+        <Link href={'https://github.com/DiegoSHS/HIDDENHASH'} passHref legacyBehavior>
           <Button sx={{ m: 2 }} variant="outlined" color='inherit'>
             github
           </Button>
