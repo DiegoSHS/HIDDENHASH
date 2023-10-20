@@ -48,6 +48,8 @@ export const sendEncrypt = (body) => postRequest('/api/encrypt', body)
 
 export const sendDecrypt = (body) => postRequest('/api/decrypt', body)
 
+export const sendDeleter = (_id) => deleteRequest(`/api/locker/${_id}`)
+
 export const save = (body) => postRequest('/api/hash/save', body)
 
 export const deleter = (_id) => deleteRequest(`/api/hash/${_id}`)

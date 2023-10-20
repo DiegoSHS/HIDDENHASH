@@ -74,6 +74,7 @@ export default function Locker() {
                     autoFocus
                 />
                 <TextField
+                    type="password"
                     margin="normal"
                     required
                     fullWidth
