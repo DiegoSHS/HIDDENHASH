@@ -1,5 +1,5 @@
 import { StoredContext } from "@/context/context"
-import { AccountCircle, LinkedIn } from "@mui/icons-material"
+import { AccountCircle } from "@mui/icons-material"
 import { AppBar, Avatar, Box, Button, Chip, Container, IconButton, ListItemIcon, Menu, MenuItem, Toolbar, Typography } from "@mui/material"
 import { signIn } from "next-auth/react"
 import Link from "next/link"
