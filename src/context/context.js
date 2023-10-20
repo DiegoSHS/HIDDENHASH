@@ -10,8 +10,12 @@ export const Context = (props) => {
     const [memory, setMemory] = useState({
         user: {},
         text: '',
+        name: '',
+        key: '',
+        dialog: false,
         storedHashes: [],
         algorithm: 'sha256',
+        selectedLocker: '',
         loading: false,
         hash: {}
     })

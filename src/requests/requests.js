@@ -16,6 +16,20 @@ const postRequest = async (route, body) => {
     }
 }
 
+const deleteRequest = async (route) => {
+    try {
+        const res = await fetch(route, {
+            method: 'DELETE'
+        })
+        const data = await res.json()
+        return data
+    } catch (error) {
+        return {
+            error: { code: 500, message: `Error al realizar petición ${error.message}` }
+        }
+    }
+}
+
 const getRequest = async (route) => {
     try {
         const res = await fetch(route, {
@@ -30,4 +44,10 @@ const getRequest = async (route) => {
 
 export const sendText = (body) => postRequest('/api/hash', body)
 
+export const sendEncrypt = (body) => postRequest('/api/encrypt', body)
+
+export const sendDecrypt = (body) => postRequest('/api/decrypt', body)
+
 export const save = (body) => postRequest('/api/hash/save', body)
+
+export const deleter = (_id) => deleteRequest(`/api/hash/${_id}`)

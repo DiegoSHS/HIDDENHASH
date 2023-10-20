@@ -1,8 +1,10 @@
 import { HashTextCards } from "@/components/hashTextCard"
+import { NoContent } from "@/components/nocontent"
 import { StoredContext } from "@/context/context"
 import { connex } from "@/models/connector"
 import { getlockers } from "@/models/transactions"
-import { Box } from "@mui/material"
+import { Box, Button } from "@mui/material"
+import Link from "next/link"
 import { useEffect } from "react"
 
 export const getServerSideProps = async ({ query: { id } }) => {
@@ -20,10 +22,17 @@ export default function Locker({ hashes }) {
     useEffect(() => {
         setStored({ storedHashes: JSON.parse(hashes) })
     }, [])
-    return (
-        <Box>
-            <HashTextCards hashes={storedHashes} />
-        </Box>
+    return (storedHashes.length !== 0 ?
+        (<HashTextCards hashes={storedHashes} />) :
+        (
+            <NoContent>
+                <Link href={'/hash/personal'}>
+                    <Button variant="contained">
+                        Volver
+                    </Button>
+                </Link>
+            </NoContent>
+        )
     )
 }
 
