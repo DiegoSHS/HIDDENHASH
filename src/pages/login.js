@@ -29,7 +29,7 @@ const Login = () => {
                 <Button
                     onClick={() => {
                         signOut()
-                        push('/')
+                        router.push('/')
                     }}
                     fullWidth
                     variant="contained"
