@@ -51,13 +51,13 @@ export const HashTextCard = ({ element: { hash, algorithm, original, _id } }) =>
     }
 
     return (
-        <Card sx={{ background: 'transparent', minWidth: '30vw', maxWidth: '85vw' }}>
+        <Card sx={{ background: 'transparent', minWidth: '30vw', maxWidth: '95vw' }}>
             <CardHeader
                 title={original}
                 subheader={algorithm}
             />
             <CardContent>
-                <Typography overflow={'clip'} variant="body2" color="text.secondary">
+                <Typography sx={{ overflow: 'hidden', maxWidth:'95%' }} variant="body2" color="text.secondary">
                     {hash}
                 </Typography>
             </CardContent>
