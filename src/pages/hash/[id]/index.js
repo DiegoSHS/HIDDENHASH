@@ -3,7 +3,7 @@ import { NoContent } from "@/components/nocontent"
 import { StoredContext } from "@/context/context"
 import { connex } from "@/models/connector"
 import { getlockers } from "@/models/transactions"
-import { Add } from "@mui/icons-material"
+import { Add, Share } from "@mui/icons-material"
 import { Box, Button, Container, Fab } from "@mui/material"
 import Link from "next/link"
 import { useEffect } from "react"
@@ -19,7 +19,7 @@ export const getServerSideProps = async ({ query: { id } }) => {
 }
 
 export default function Locker({ hashes }) {
-    const { memory: { storedHashes }, setStored } = StoredContext()
+    const { memory: { storedHashes, user: { email } }, setStored } = StoredContext()
     useEffect(() => {
         setStored({ storedHashes: JSON.parse(hashes) })
     }, [])
@@ -31,12 +31,21 @@ export default function Locker({ hashes }) {
                 flexDirection: 'column',
                 alignItems: 'center'
             }}>
-                <Link href={`/hash/`} legacyBehavior passHref>
-                    <Fab variant="extended" sx={{ position: 'fixed', bottom: 100 }}>
-                        <Add sx={{ mr: 1 }} />
-                        Nuevo hash
-                    </Fab>
-                </Link>
+                <Box sx={{ position: 'fixed', bottom: 100 }}>
+                    <Link href={`/hash/`} legacyBehavior passHref>
+                        <Fab variant="extended" sx={{ m: 1 }}>
+                            <Add sx={{ mr: 1 }} />
+                            Nuevo hash
+                        </Fab>
+                    </Link>
+                    <Link href={`/share/${email}`} legacyBehavior passHref>
+                        <Fab variant="extended" sx={{ m: 1 }}>
+                            <Share sx={{ mr: 1 }} />
+                            Compartir
+                        </Fab>
+                    </Link>
+                </Box>
+
                 <Container maxWidth='sm'><HashTextCards hashes={storedHashes} /></Container>
             </Box>) :
         (

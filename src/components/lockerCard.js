@@ -21,6 +21,10 @@ export const LockerCard = ({ element: { encrypted, name, email, _id } }) => {
         setStored({ selectedLocker: encrypted })
         setStored({ dialog: true })
     }
+    const handleDelete = () => {
+        setStored({ selectedLocker: { _id, encrypted } })
+        setStored({ deleteDialog: true })
+    }
     return (
         <Card sx={{ background: 'transparent', minWidth: '30vw', maxWidth: '85vw' }}>
             <CardHeader
@@ -41,6 +45,9 @@ export const LockerCard = ({ element: { encrypted, name, email, _id } }) => {
                 </IconButton>
                 <IconButton disabled={visible} aria-label="copiar" color='info' onClick={() => copy(encrypted)}>
                     <CopyAll />
+                </IconButton>
+                <IconButton disabled={visible} aria-label="copiar" onClick={handleDelete}>
+                    <Delete />
                 </IconButton>
             </CardActions>
         </Card>
