@@ -22,11 +22,11 @@ export const LockerCard = ({ element: { encrypted, name, email, _id } }) => {
         setStored({ dialog: true })
     }
     const handleDelete = () => {
-        setStored({ selectedLocker: {_id,encrypted} })
+        setStored({ selectedLocker: { _id, encrypted } })
         setStored({ deleteDialog: true })
     }
     return (
-        <Card sx={{ background: 'transparent' }}>
+        <Card sx={{ background: 'transparent', minWidth: '30vw', maxWidth: '95vw' }} >
             <CardHeader
                 title={name}
                 subheader={`Dueño: ${email}`}
@@ -36,7 +36,7 @@ export const LockerCard = ({ element: { encrypted, name, email, _id } }) => {
                     <AccordionSummary >
                         Texto encriptado
                     </AccordionSummary>
-                    <AccordionDetails sx={{ overflow: 'hidden' }}>
+                    <AccordionDetails sx={{ overflow: 'hidden', maxWidth:'95%' }}>
                         {encrypted}
                     </AccordionDetails>
                 </Accordion>
@@ -46,12 +46,12 @@ export const LockerCard = ({ element: { encrypted, name, email, _id } }) => {
                     <LockOpen />
                 </IconButton>
                 <IconButton aria-label="ver encriptado" onClick={handleVisible}>
-                    <RemoveRedEye color={visible ? 'secondary' : 'error'} />
+                    <RemoveRedEye color={visible ? 'secondary' : 'warning'} />
                 </IconButton>
-                <IconButton disabled={visible} aria-label="copiar" onClick={() => copy(encrypted)}>
+                <IconButton disabled={visible} aria-label="copiar" color='info' onClick={() => copy(encrypted)}>
                     <CopyAll />
                 </IconButton>
-                <IconButton disabled={visible} aria-label="copiar" onClick={handleDelete}>
+                <IconButton disabled={visible} aria-label="copiar" color='error' onClick={handleDelete}>
                     <Delete />
                 </IconButton>
             </CardActions>

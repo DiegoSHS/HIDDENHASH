@@ -53,3 +53,5 @@ export const sendDeleter = (_id) => deleteRequest(`/api/locker/${_id}`)
 export const save = (body) => postRequest('/api/hash/save', body)
 
 export const deleter = (_id) => deleteRequest(`/api/hash/${_id}`)
+
+export const sendSession = (body) => postRequest('/api/session', body)
