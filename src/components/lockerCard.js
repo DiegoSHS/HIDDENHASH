@@ -21,25 +21,16 @@ export const LockerCard = ({ element: { encrypted, name, email, _id } }) => {
         setStored({ selectedLocker: encrypted })
         setStored({ dialog: true })
     }
-    const handleDelete = () => {
-        setStored({ selectedLocker: { _id, encrypted } })
-        setStored({ deleteDialog: true })
-    }
     return (
-        <Card sx={{ background: 'transparent', minWidth: '30vw', maxWidth: '95vw' }} >
+        <Card sx={{ background: 'transparent', minWidth: '30vw', maxWidth: '85vw' }}>
             <CardHeader
                 title={name}
                 subheader={`Dueño: ${email}`}
             />
             <CardContent>
-                <Accordion expanded={!visible} disabled>
-                    <AccordionSummary >
-                        Texto encriptado
-                    </AccordionSummary>
-                    <AccordionDetails sx={{ overflow: 'hidden', maxWidth:'95%' }}>
-                        {encrypted}
-                    </AccordionDetails>
-                </Accordion>
+                <Typography hidden={visible} overflow={'clip'} variant="body2" color="text.secondary">
+                    {encrypted}
+                </Typography>
             </CardContent>
             <CardActions disableSpacing>
                 <IconButton aria-label="desbloquear" onClick={handleOpen}>
@@ -50,9 +41,6 @@ export const LockerCard = ({ element: { encrypted, name, email, _id } }) => {
                 </IconButton>
                 <IconButton disabled={visible} aria-label="copiar" color='info' onClick={() => copy(encrypted)}>
                     <CopyAll />
-                </IconButton>
-                <IconButton disabled={visible} aria-label="copiar" color='error' onClick={handleDelete}>
-                    <Delete />
                 </IconButton>
             </CardActions>
         </Card>
