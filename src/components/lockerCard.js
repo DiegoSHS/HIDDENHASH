@@ -46,7 +46,7 @@ export const LockerCard = ({ element: { encrypted, name, email, _id } }) => {
                 <IconButton disabled={visible} aria-label="copiar" color='info' onClick={() => copy(encrypted)}>
                     <CopyAll />
                 </IconButton>
-                <IconButton disabled={visible} aria-label="copiar" onClick={handleDelete}>
+                <IconButton disabled={visible} aria-label="copiar" color='error' onClick={handleDelete}>
                     <Delete />
                 </IconButton>
             </CardActions>
