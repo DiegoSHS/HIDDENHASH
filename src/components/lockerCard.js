@@ -26,20 +26,15 @@ export const LockerCard = ({ element: { encrypted, name, email, _id } }) => {
         setStored({ deleteDialog: true })
     }
     return (
-        <Card sx={{ background: 'transparent', minWidth: '30vw', maxWidth: '95vw' }} >
+        <Card sx={{ background: 'transparent', minWidth: '30vw', maxWidth: '85vw' }}>
             <CardHeader
                 title={name}
                 subheader={`Dueño: ${email}`}
             />
             <CardContent>
-                <Accordion expanded={!visible} disabled>
-                    <AccordionSummary >
-                        Texto encriptado
-                    </AccordionSummary>
-                    <AccordionDetails sx={{ overflow: 'hidden', maxWidth:'95%' }}>
-                        {encrypted}
-                    </AccordionDetails>
-                </Accordion>
+                <Typography hidden={visible} overflow={'clip'} variant="body2" color="text.secondary">
+                    {encrypted}
+                </Typography>
             </CardContent>
             <CardActions disableSpacing>
                 <IconButton aria-label="desbloquear" onClick={handleOpen}>

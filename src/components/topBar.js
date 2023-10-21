@@ -1,6 +1,5 @@
 import { StoredContext } from "@/context/context"
-import { sendSession } from "@/requests/requests"
-import { AccountCircle, Tag } from "@mui/icons-material"
+import { AccountCircle } from "@mui/icons-material"
 import { AppBar, Avatar, Button, Chip, Container, IconButton, Toolbar } from "@mui/material"
 import { getSession, signIn } from "next-auth/react"
 import Link from "next/link"
