@@ -14,6 +14,7 @@ export const Context = (props) => {
         key: '',
         dialog: false,
         deleteDialog: false,
+        shareDialog: false,
         storedHashes: [],
         storedLockers: [],
         storedUsers: [],
