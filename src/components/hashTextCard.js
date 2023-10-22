@@ -12,7 +12,7 @@ export const copy = async (text) => {
 
 export const HashTextCards = ({ hashes }) => hashes.map((e, i) => <HashTextCard element={e} key={i} />)
 
-export const HashTextCard = ({ element: { hash, algorithm, original, _id }, personal }) => {
+export const HashTextCard = ({ element: { hash, algorithm, original, _id } }) => {
     const [saved, setSaved] = useState(0)
     const { memory: { user: { email }, storedHashes }, setStored } = StoredContext()
     const handleSave = async () => {
@@ -77,18 +77,25 @@ export const HashTextCard = ({ element: { hash, algorithm, original, _id }, pers
     )
 }
 
-export const HashSharedCards = ({ hashes, shareInfo }) => hashes.map((e, i) => <HashSharedCard element={e} shareInfo={shareInfo} key={i}></HashSharedCard>)
+export const HashSharedCards = ({ hashes, shareInfo }) => {
+    const [hashess, setHashess] = useState(hashes)
+    if (hashess.length === 0) {
+        return (<Typography>Nada compartido</Typography>)
+    }
+    return (
+        hashess.map((e, i) => <HashSharedCard element={e} shareInfo={shareInfo} key={i} stateFn={setHashess}></HashSharedCard>)
+    )
+}
 
-export const HashSharedCard = ({ element: { hash, algorithm, original, _id }, shareInfo: { addresse, origin } }) => {
-    const { memory: { storedHashes }, setStored } = StoredContext()
+export const HashSharedCard = ({ element: { hash, algorithm, original, _id }, shareInfo: { addressee, origin }, stateFn }) => {
     const handleDelete = () => {
-        toast.promise(deleteShared({ addresse, origin, _id }), {
+        toast.promise(deleteShared({ addressee, origin, _id }), {
             error: `Error al solicitar eliminación`,
             success: (data) => {
                 if (data.error) {
                     return `Error en el servidor`
                 }
-                setStored({ storedHashes: storedHashes.filter(e => e._id !== _id) })
+                stateFn((state) => state.map(e => e._id !== _id))
                 return 'Eliminado de compartidos'
             },
             loading: 'Eliminando'

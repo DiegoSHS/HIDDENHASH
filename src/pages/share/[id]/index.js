@@ -3,8 +3,8 @@ import { ShareWith } from "@/components/shareAccordion"
 import { StoredContext } from "@/context/context"
 import { connex } from "@/models/connector"
 import { getLocker, getlockers } from "@/models/transactions"
-import { getSessions, sendSession, sendShared } from "@/requests/requests"
-import { Send, Share } from "@mui/icons-material"
+import { getSessions, handleShare, sendSession, sendShared } from "@/requests/requests"
+import { ArrowBack, Send, Share } from "@mui/icons-material"
 import { Box, Button, Card, CardHeader, Checkbox, Dialog, DialogActions, DialogContent, DialogTitle, Fab, IconButton, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Typography } from "@mui/material"
 import Link from "next/link"
 import { useEffect, useState } from "react"
@@ -33,19 +33,19 @@ export default function ShareItems({ items: { fuser, hashes } }) {
   const [userf, setUserf] = useState(fetchUser)
   const [selected, setSelected] = useState([])
   const [checked, setChecked] = useState(false)
-  const [startFetch, setStartFetch] = useState(false)
   const getter = async () => {
     const res = await getSessions()
     if (res.error) {
       return
     }
-    setStored({ storedUsers: res.filter(e => e.email !== user.email) })
+    const users = res.filter(e => e.email !== user.email)
+    setStored({ storedUsers: users })
   }
 
-  useEffect(() => { setStored({ storedHashes: JSON.parse(hashes) }) }, [])
   useEffect(() => {
+    setStored({ storedHashes: JSON.parse(hashes) })
     getter()
-  }, [startFetch])
+  }, [])
   const handleSubmit = async () => {
     toast.promise(sendSession(user),
       {
@@ -78,21 +78,6 @@ export default function ShareItems({ items: { fuser, hashes } }) {
   }
   const handleStartShare = () => {
     setStored({ dialog: true })
-    setStartFetch(true)
-  }
-  const handleShare = (share) => {
-    toast.promise(sendShared(share), {
-      success: (data) => {
-        if (data.error) {
-          return `${data.error.message}`
-        }
-        return 'Compartido!'
-      },
-      error: 'Error al enviar',
-      loading: 'Compartiendo'
-    }, {
-      success: { icon: false }
-    })
   }
   const handleClose = () => {
     setStored({ dialog: false })
@@ -105,7 +90,7 @@ export default function ShareItems({ items: { fuser, hashes } }) {
         alignItems: 'center'
       }}>
 
-        <Dialog open={dialog} onClose={handleClose} maxWidth='sm'>
+        <Dialog open={dialog} onClose={handleClose} maxWidth='sm' >
           <DialogTitle>Enviar a</DialogTitle>
           <DialogContent>
             {storedUsers.length !== 0 ?
@@ -162,13 +147,12 @@ export default function ShareItems({ items: { fuser, hashes } }) {
         </Box>
         <Box sx={{ position: 'fixed', bottom: 100 }}>
           <Link href={`/hash/${user.email}`} passHref legacyBehavior>
-            <Fab variant="extended" sx={{ m: 1 }}>
-              Volver
+            <Fab size="medium" sx={{ m: 1 }}>
+              <ArrowBack />
             </Fab>
           </Link>
-          <Fab variant="extended" onClick={handleStartShare} disabled={selected.length === 0} sx={{ m: 1 }}>
-            <Share sx={{ mr: 1 }} />
-            Enviar a
+          <Fab onClick={handleStartShare} size="medium" disabled={selected.length === 0} sx={{ m: 1 }}>
+            <Send />
           </Fab>
         </Box>
       </Box>

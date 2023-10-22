@@ -1,15 +1,17 @@
-import { HashSharedCards, HashTextCards } from "@/components/hashTextCard"
 import { NoContent } from "@/components/nocontent"
 import { ShareAccordion } from "@/components/shareAccordion"
 import { StoredContext } from "@/context/context"
 import { connex } from "@/models/connector"
-import { ExpandMore, More } from "@mui/icons-material"
-import { Accordion, AccordionDetails, AccordionSummary, Box, Button, Container, Typography } from "@mui/material"
+import { ArrowBack } from "@mui/icons-material"
+import { Box, Button, Fab } from "@mui/material"
 import Link from "next/link"
 
 export const getServerSideProps = async ({ query: { id } }) => {
     const collection = connex({ collec: 'shared' })
     const sharedItems = await collection.aggregate([
+        {
+            $match: { addressee: id }
+        },
         {
             $lookup: {
                 from: "hashes",
@@ -29,7 +31,6 @@ export const getServerSideProps = async ({ query: { id } }) => {
 export default function Shared({ shared }) {
     const { memory: { user: { email } } } = StoredContext()
     const sharedHashes = JSON.parse(shared)
-    sharedHashes.map(e => { console.log(e) })
     return (sharedHashes.length !== 0 ?
         (
             <Box sx={{
@@ -40,6 +41,13 @@ export default function Shared({ shared }) {
                 {
                     sharedHashes.map(ShareAccordion)
                 }
+                <Box sx={{ position: 'fixed', bottom: 100 }}>
+                    <Link href={`/hash/${email}`} passHref legacyBehavior>
+                        <Fab size="medium" sx={{ m: 1 }}>
+                            <ArrowBack />
+                        </Fab>
+                    </Link>
+                </Box>
             </Box>
         ) :
         (
@@ -52,11 +60,4 @@ export default function Shared({ shared }) {
             </NoContent>
         )
     )
-}
-
-
-
-
-const handleDelShared = () => {
-    toast.promise(deleteShared({ addressee: '', origin: '', _id }))
 }

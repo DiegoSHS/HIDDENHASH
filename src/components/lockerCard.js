@@ -1,4 +1,4 @@
-import { CopyAll, Delete, LockOpen, RemoveRedEye } from '@mui/icons-material'
+import { CopyAll, Delete, LockOpen, RemoveRedEye, Share } from '@mui/icons-material'
 import { Accordion, AccordionDetails, AccordionSummary, Card, CardActions, CardContent, CardHeader, IconButton, Typography } from '@mui/material'
 import { useState } from 'react'
 import { copy } from './hashTextCard'
@@ -25,6 +25,10 @@ export const LockerCard = ({ element: { encrypted, name, email, _id } }) => {
         setStored({ selectedLocker: { _id, encrypted } })
         setStored({ deleteDialog: true })
     }
+    const handleShare = () => {
+        setStored({ selectedLocker: _id })
+        setStored({ shareDialog: true })
+    }
     return (
         <Card sx={{ background: 'transparent', minWidth: '30vw', maxWidth: '85vw' }}>
             <CardHeader
@@ -42,6 +46,9 @@ export const LockerCard = ({ element: { encrypted, name, email, _id } }) => {
                 </IconButton>
                 <IconButton aria-label="ver encriptado" onClick={handleVisible}>
                     <RemoveRedEye color={visible ? 'secondary' : 'warning'} />
+                </IconButton>
+                <IconButton aria-label="ver encriptado" onClick={handleShare}>
+                    <Share />
                 </IconButton>
                 <IconButton disabled={visible} aria-label="copiar" color='info' onClick={() => copy(encrypted)}>
                     <CopyAll />

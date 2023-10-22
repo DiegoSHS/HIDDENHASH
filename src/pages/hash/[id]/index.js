@@ -3,7 +3,7 @@ import { NoContent } from "@/components/nocontent"
 import { StoredContext } from "@/context/context"
 import { connex } from "@/models/connector"
 import { getlockers } from "@/models/transactions"
-import { Add, Inbox, Share, Tag } from "@mui/icons-material"
+import { Add, ArrowBack, Inbox, Share, Tag } from "@mui/icons-material"
 import { Box, Button, Container, Fab, SpeedDial, SpeedDialAction, SpeedDialIcon } from "@mui/material"
 import Link from "next/link"
 import { useEffect } from "react"
@@ -31,39 +31,27 @@ export default function Locker({ hashes }) {
                 alignItems: 'center'
             }}>
                 <Box sx={{ position: 'fixed', bottom: 100 }}>
-                    <SpeedDial
-                        color="error"
-                        ariaLabel="Opciones para compartir"
-                        icon={<Tag />}
-                    >
-                        <SpeedDialAction
-                            key='Compartir'
-                            icon={
-                                <Link href={`/share/${email}`} legacyBehavior passHref>
-                                    <Share />
-                                </Link>
-                            }
-                            tooltipTitle='Compartir'
-                        />
-                        <SpeedDialAction
-                            key='Compartidos'
-                            icon={
-                                <Link href={`/share/${email}/mine`} legacyBehavior passHref>
-                                    <Inbox />
-                                </Link>
-                            }
-                            tooltipTitle='Compartidos conmigo'
-                        />
-                        <SpeedDialAction
-                            key='Nuevo'
-                            icon={
-                                <Link href={`/hash/`} legacyBehavior passHref>
-                                    <Add />
-                                </Link>
-                            }
-                            tooltipTitle='Nuevo'
-                        />
-                    </SpeedDial>
+                    <Link href={`/hash/personal`} passHref legacyBehavior>
+                        <Fab sx={{ m: 1 }} size="medium">
+                            <ArrowBack />
+                        </Fab>
+                    </Link>
+                    <Link href={`/hash`} passHref legacyBehavior>
+                        <Fab sx={{ m: 1 }} size="medium">
+                            <Add />
+                        </Fab>
+                    </Link>
+                    <Link href={`/share/${email}`} passHref legacyBehavior>
+                        <Fab sx={{ m: 1 }} size="medium">
+                            <Share />
+                        </Fab>
+                    </Link>
+                    <Link href={`/share/${email}/mine`} passHref legacyBehavior>
+                        <Fab sx={{ m: 1 }} size="medium">
+                            <Inbox />
+                        </Fab>
+                    </Link>
+
                 </Box>
                 <Container maxWidth='sm'><HashTextCards hashes={storedHashes} /></Container>
             </Box>) :
