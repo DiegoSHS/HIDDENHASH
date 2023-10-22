@@ -1,4 +1,5 @@
 import { NoContent } from "@/components/nocontent"
+import { ShareWith } from "@/components/shareAccordion"
 import { StoredContext } from "@/context/context"
 import { connex } from "@/models/connector"
 import { getLocker, getlockers } from "@/models/transactions"
@@ -108,21 +109,9 @@ export default function ShareItems({ items: { fuser, hashes } }) {
           <DialogTitle>Enviar a</DialogTitle>
           <DialogContent>
             {storedUsers.length !== 0 ?
-              (storedUsers.map(e => {
+              (storedUsers.map((e, i) => {
                 return (
-                  <Card>
-                    <CardHeader
-                      title={e.name}
-                      subheader={e.email}
-                      action={
-                        <IconButton onClick={() => {
-                          handleShare({ origin: e.email, sharedItems: selected, addressee: user.email })
-                        }}>
-                          <Send />
-                        </IconButton>
-                      }
-                    />
-                  </Card>
+                  <ShareWith user={e} selected={selected} handler={handleShare} addressee={user.email} key={i} />
                 )
               })) :
               (<Typography>No hay nadie con quien copartir aún</Typography>)}

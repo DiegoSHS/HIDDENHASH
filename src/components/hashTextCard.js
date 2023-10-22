@@ -10,7 +10,7 @@ export const copy = async (text) => {
     await navigator.clipboard.writeText(text)
 }
 
-export const HashTextCards = ({ hashes }) => hashes.map((e, i) => <HashTextCard element={e} key={i}></HashTextCard>)
+export const HashTextCards = ({ hashes }) => hashes.map((e, i) => <HashTextCard element={e} key={i} />)
 
 export const HashTextCard = ({ element: { hash, algorithm, original, _id }, personal }) => {
     const [saved, setSaved] = useState(0)
