@@ -1,4 +1,4 @@
-import { NoContent } from "@/components/nocontent"
+import { NoContent } from "@/components/noContent"
 import { ShareWith } from "@/components/shareAccordion"
 import { StoredContext } from "@/context/context"
 import { connex } from "@/models/connector"
