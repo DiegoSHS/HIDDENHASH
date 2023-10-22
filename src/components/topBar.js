@@ -1,12 +1,20 @@
 import { StoredContext } from "@/context/context"
 import { AccountCircle } from "@mui/icons-material"
 import { AppBar, Avatar, Button, Chip, Container, IconButton, Toolbar } from "@mui/material"
-import { signIn } from "next-auth/react"
+import { getSession, signIn } from "next-auth/react"
 import Link from "next/link"
+
+const handleSignin = async () => {
+    signIn()
+    const session = await getSession()
+    const user = session.user
+    const res = await sendSession(user)
+    console.log(res)
+}
 
 const AccountButton = ({ user }) => {
     return (!user.name ? (
-        <IconButton disableRipple onClick={signIn}>
+        <IconButton disableRipple onClick={handleSignin}>
             <Chip label="Acceder" icon={<AccountCircle />} variant="outlined" />
         </IconButton>
     ) : (
