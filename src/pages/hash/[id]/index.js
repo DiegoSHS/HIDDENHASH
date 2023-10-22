@@ -1,5 +1,5 @@
 import { HashTextCards } from "@/components/hashTextCard"
-import { NoContent } from "@/components/noContent"
+import { NoContent } from "@/components/nocontent"
 import { StoredContext } from "@/context/context"
 import { connex } from "@/models/connector"
 import { getlockers } from "@/models/transactions"

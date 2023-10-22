@@ -1,7 +1,9 @@
-import { StoredContext } from '@/context/context'
-import { handleShare, sendDecrypt } from '@/requests/requests'
-import { Button, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, TextField, Typography } from '@mui/material'
-import { ShareWith } from './shareAccordion'
+import { StoredContext } from "@/context/context"
+import { sendDecrypt } from "@/requests/requests"
+import toast from "react-hot-toast"
+import { copy } from "./hashTextCard"
+import { Button, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, TextField, Typography } from "@mui/material"
+import { ShareWith } from "./shareAccordion"
 
 export const UnlockDialog = () => {
     const { memory: { selectedLocker, key, dialog }, setStored } = StoredContext()

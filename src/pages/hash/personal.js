@@ -1,6 +1,6 @@
-import { StoredContext } from "@/context/context";
-import { Box, Button, Typography } from "@mui/material";
-import Link from "next/link";
+import { StoredContext } from "@/context/context"
+import { Box, Button, Typography } from "@mui/material"
+import Link from "next/link"
 
 export default function Personal() {
     const { memory: { user: { email } } } = StoredContext()
