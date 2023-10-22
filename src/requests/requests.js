@@ -55,3 +55,9 @@ export const save = (body) => postRequest('/api/hash/save', body)
 export const deleter = (_id) => deleteRequest(`/api/hash/${_id}`)
 
 export const sendSession = (body) => postRequest('/api/session', body)
+
+export const getSessions = () => getRequest('/api/session')
+
+export const sendShared = (body) => postRequest('/api/share', body)
+
+export const deleteShared = (body) => postRequest('/api/deleteshared', body)
