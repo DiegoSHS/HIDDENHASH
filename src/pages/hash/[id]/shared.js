@@ -1,5 +1,5 @@
-import { UnlockDialog } from "@/components/dialogs"
-import { NoContent } from "@/components/noContent"
+import { UnlockDialog } from "@/components/Dialogs"
+import { NoContent } from "@/components/nocontent"
 import { LockerAccordion } from "@/components/shareAccordion"
 import { StoredContext } from "@/context/context"
 import { connex } from "@/models/connector"

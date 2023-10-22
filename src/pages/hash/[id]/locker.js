@@ -1,4 +1,4 @@
-import { DeleteDialog, ShareDialog, UnlockDialog } from "@/components/dialogs"
+import { DeleteDialog, ShareDialog, UnlockDialog } from "@/components/Dialogs"
 import { LockerCards } from "@/components/lockerCard"
 import { NoContent } from "@/components/noContent"
 import { StoredContext } from "@/context/context"
