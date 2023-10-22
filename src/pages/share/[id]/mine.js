@@ -1,5 +1,6 @@
 import { HashSharedCards, HashTextCards } from "@/components/hashTextCard"
 import { NoContent } from "@/components/nocontent"
+import { ShareAccordion } from "@/components/shareAccordion"
 import { StoredContext } from "@/context/context"
 import { connex } from "@/models/connector"
 import { ExpandMore, More } from "@mui/icons-material"
@@ -37,23 +38,7 @@ export default function Shared({ shared }) {
                 alignItems: 'center'
             }}>
                 {
-                    sharedHashes.map(e => {
-                        return (
-                            <Accordion sx={{ background: 'transparent', minWidth: '30vw', maxWidth: '85vw' }}>
-                                <AccordionSummary expandIcon={<ExpandMore />} id="sharedFrom">
-                                    <Typography>Compartido por: {e.origin}</Typography>
-                                </AccordionSummary>
-                                <AccordionDetails>
-                                    <Container maxWidth='sm'>
-                                        <HashSharedCards key={e._id} hashes={e.sharedItems} shareInfo={{
-                                            addressee: e.addressee,
-                                            origin: e.origin
-                                        }} />
-                                    </Container>
-                                </AccordionDetails>
-                            </Accordion>
-                        )
-                    })
+                    sharedHashes.map(ShareAccordion)
                 }
             </Box>
         ) :

@@ -22,8 +22,8 @@ export const getServerSideProps = async ({ query: { id } }) => {
 }
 
 export default function Locker({ lockers }) {
-    useEffect(() => { setStored({ storedLockers: JSON.parse(lockers) }) }, [])
     const { memory: { dialog, deleteDialog, selectedLocker, storedLockers, key }, setStored } = StoredContext()
+    useEffect(() => { setStored({ storedLockers: JSON.parse(lockers) }) }, [])
     const handleSubmit = () => {
         setStored({ dialog: false })
         toast.promise(sendDecrypt({ text: selectedLocker, secret_key: key }), {
