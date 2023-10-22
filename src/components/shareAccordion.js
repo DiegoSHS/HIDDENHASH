@@ -1,3 +1,7 @@
+import { Accordion, AccordionDetails, AccordionSummary, Card, CardHeader, Container, IconButton, Typography } from "@mui/material"
+import { HashSharedCards } from "./hashTextCard"
+import { ExpandMore, Send } from "@mui/icons-material"
+
 export const ShareAccordion = ({ origin, sharedItems, addressee, _id }) => {
     return (
         <Accordion sx={{ background: 'transparent', minWidth: '30vw', maxWidth: '85vw' }}>
