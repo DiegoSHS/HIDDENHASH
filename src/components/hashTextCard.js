@@ -1,22 +1,18 @@
 import { StoredContext } from "@/context/context"
-import { deleter, save } from "@/requests/requests"
+import { deleteShared, deleter, save } from "@/requests/requests"
 import { Check, CopyAll, Delete, Save } from "@mui/icons-material"
 import { Card, CardActions, CardContent, CardHeader, Container, IconButton, Typography } from "@mui/material"
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import toast from "react-hot-toast"
+import { NoContent } from "./nocontent"
 
 export const copy = async (text) => {
     await navigator.clipboard.writeText(text)
 }
 
-export const HashTextCards = ({ hashes }) => {
-    if (hashes.length === 0) return ('')
-    return (
-        hashes.map((e, i) => <HashTextCard element={e} key={i}></HashTextCard>)
-    )
-}
+export const HashTextCards = ({ hashes }) => hashes.map((e, i) => <HashTextCard element={e} key={i}></HashTextCard>)
 
-export const HashTextCard = ({ element: { hash, algorithm, original, _id } }) => {
+export const HashTextCard = ({ element: { hash, algorithm, original, _id }, personal }) => {
     const [saved, setSaved] = useState(0)
     const { memory: { user: { email }, storedHashes }, setStored } = StoredContext()
     const handleSave = async () => {
@@ -49,7 +45,6 @@ export const HashTextCard = ({ element: { hash, algorithm, original, _id } }) =>
             success: { icon: false }
         })
     }
-
     return (
         <Card sx={{ background: 'transparent', minWidth: '30vw', maxWidth: '95vw' }}>
             <CardHeader
@@ -57,7 +52,7 @@ export const HashTextCard = ({ element: { hash, algorithm, original, _id } }) =>
                 subheader={algorithm}
             />
             <CardContent>
-                <Typography sx={{ overflow: 'hidden', maxWidth:'95%' }} variant="body2" color="text.secondary">
+                <Typography sx={{ overflow: 'hidden', maxWidth: '95%' }} variant="body2" color="text.secondary">
                     {hash}
                 </Typography>
             </CardContent>
@@ -74,6 +69,48 @@ export const HashTextCard = ({ element: { hash, algorithm, original, _id } }) =>
                         </IconButton>
                     )
                 }
+                <IconButton onClick={() => { copy(hash) }} aria-label="copiar">
+                    <CopyAll />
+                </IconButton>
+            </CardActions>
+        </Card>
+    )
+}
+
+export const HashSharedCards = ({ hashes, shareInfo }) => hashes.map((e, i) => <HashSharedCard element={e} shareInfo={shareInfo} key={i}></HashSharedCard>)
+
+export const HashSharedCard = ({ element: { hash, algorithm, original, _id }, shareInfo: { addresse, origin } }) => {
+    const { memory: { storedHashes }, setStored } = StoredContext()
+    const handleDelete = () => {
+        toast.promise(deleteShared({ addresse, origin, _id }), {
+            error: `Error al solicitar eliminación`,
+            success: (data) => {
+                if (data.error) {
+                    return `Error en el servidor`
+                }
+                setStored({ storedHashes: storedHashes.filter(e => e._id !== _id) })
+                return 'Eliminado de compartidos'
+            },
+            loading: 'Eliminando'
+        }, {
+            success: { icon: false }
+        })
+    }
+    return (
+        <Card sx={{ background: 'transparent', minWidth: '30vw', maxWidth: '95vw' }}>
+            <CardHeader
+                title={original}
+                subheader={algorithm}
+            />
+            <CardContent>
+                <Typography sx={{ overflow: 'hidden', maxWidth: '95%' }} variant="body2" color="text.secondary">
+                    {hash}
+                </Typography>
+            </CardContent>
+            <CardActions disableSpacing>
+                <IconButton onClick={handleDelete} aria-label="copiar">
+                    <Delete color="error" />
+                </IconButton>
                 <IconButton onClick={() => { copy(hash) }} aria-label="copiar">
                     <CopyAll />
                 </IconButton>

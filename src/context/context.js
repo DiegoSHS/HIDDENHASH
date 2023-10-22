@@ -16,6 +16,7 @@ export const Context = (props) => {
         deleteDialog: false,
         storedHashes: [],
         storedLockers: [],
+        storedUsers: [],
         algorithm: 'sha256',
         selectedLocker: '',
         loading: false,
