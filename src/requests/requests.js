@@ -1,3 +1,5 @@
+import toast from "react-hot-toast"
+
 const postRequest = async (route, body) => {
     try {
         const res = await fetch(route, {
@@ -42,6 +44,21 @@ const getRequest = async (route) => {
     }
 }
 
+export const handleShare = (share) => {
+    toast.promise(sendShared(share), {
+        success: (data) => {
+            if (data.error) {
+                return `${data.error.message}`
+            }
+            return 'Compartido!'
+        },
+        error: 'Error al enviar',
+        loading: 'Compartiendo'
+    }, {
+        success: { icon: false }
+    })
+}
+
 export const sendText = (body) => postRequest('/api/hash', body)
 
 export const sendEncrypt = (body) => postRequest('/api/encrypt', body)
@@ -60,4 +77,4 @@ export const getSessions = () => getRequest('/api/session')
 
 export const sendShared = (body) => postRequest('/api/share', body)
 
-export const deleteShared = (body) => postRequest('/api/deleteshared', body)
+export const deleteShared = (body) => postRequest('/api/share/deleteshared', body)
