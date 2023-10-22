@@ -5,7 +5,7 @@ import { ArrowRightAlt, Tag, TextFormat } from "@mui/icons-material"
 import { Avatar, Box, Button, FormControl, InputLabel, MenuItem, Select, TextField, Typography } from "@mui/material"
 import { getHashes } from "crypto"
 import { useState } from "react"
-export default function Createhash({ algorithms }) {
+export default function Createhash({ algorithms, children }) {
     const [hashes, setHashes] = useState([])
     const { memory: { algorithm, text, user: { email } }, setStored } = StoredContext()
     const handleChange = (e) => {
@@ -84,6 +84,7 @@ export default function Createhash({ algorithms }) {
                 </Button>
             </Box>
             <HashTextCards hashes={hashes} />
+            {children}
         </Box >
     )
 }

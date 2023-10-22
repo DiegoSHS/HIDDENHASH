@@ -1,11 +1,9 @@
 import { StoredContext } from "@/context/context"
 import { deleteShared, deleter, save } from "@/requests/requests"
 import { Check, CopyAll, Delete, Save } from "@mui/icons-material"
-import { Card, CardActions, CardContent, CardHeader, Container, IconButton, Typography } from "@mui/material"
-import { useEffect, useState } from "react"
+import { Card, CardActions, CardContent, CardHeader, IconButton, Typography } from "@mui/material"
+import { useState } from "react"
 import toast from "react-hot-toast"
-import { NoContent } from "./nocontent"
-
 export const copy = async (text) => {
     await navigator.clipboard.writeText(text)
 }

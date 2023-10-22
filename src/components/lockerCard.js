@@ -1,11 +1,11 @@
 import { CopyAll, Delete, LockOpen, RemoveRedEye, Share } from '@mui/icons-material'
-import { Accordion, AccordionDetails, AccordionSummary, Card, CardActions, CardContent, CardHeader, IconButton, Typography } from '@mui/material'
+import { Card, CardActions, CardContent, CardHeader, IconButton, Typography } from '@mui/material'
 import { useState } from 'react'
 import { copy } from './hashTextCard'
 import { StoredContext } from '@/context/context'
 
 export const LockerCards = ({ lockers }) => {
-    if (lockers.length === 0) return ('')
+    if (!lockers || lockers.length === 0) return ('')
     return (
         lockers.map((e, i) => <LockerCard element={e} key={i} />)
     )

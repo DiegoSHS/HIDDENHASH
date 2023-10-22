@@ -3,8 +3,8 @@ import { NoContent } from "@/components/nocontent"
 import { StoredContext } from "@/context/context"
 import { connex } from "@/models/connector"
 import { getlockers } from "@/models/transactions"
-import { Add, ArrowBack, Inbox, Share, Tag } from "@mui/icons-material"
-import { Box, Button, Container, Fab, SpeedDial, SpeedDialAction, SpeedDialIcon } from "@mui/material"
+import { Add, ArrowBack, Inbox, Share } from "@mui/icons-material"
+import { Box, Button, Container, Fab } from "@mui/material"
 import Link from "next/link"
 import { useEffect } from "react"
 
@@ -18,7 +18,7 @@ export const getServerSideProps = async ({ query: { id } }) => {
     }
 }
 
-export default function Locker({ hashes }) {
+export default function Hashes({ hashes }) {
     const { memory: { storedHashes, user: { email } }, setStored } = StoredContext()
     useEffect(() => {
         setStored({ storedHashes: JSON.parse(hashes) })
@@ -36,7 +36,7 @@ export default function Locker({ hashes }) {
                             <ArrowBack />
                         </Fab>
                     </Link>
-                    <Link href={`/hash`} passHref legacyBehavior>
+                    <Link href={`/hash/${email}/newhash`} passHref legacyBehavior>
                         <Fab sx={{ m: 1 }} size="medium">
                             <Add />
                         </Fab>
@@ -51,7 +51,6 @@ export default function Locker({ hashes }) {
                             <Inbox />
                         </Fab>
                     </Link>
-
                 </Box>
                 <Container maxWidth='sm'><HashTextCards hashes={storedHashes} /></Container>
             </Box>) :

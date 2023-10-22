@@ -1,7 +1,7 @@
 import { StoredContext } from "@/context/context"
 import { sendEncrypt } from "@/requests/requests"
-import { Key, Lock, Password } from "@mui/icons-material"
-import { Avatar, Box, Button, LinearProgress, TextField, Typography } from "@mui/material"
+import { ArrowBack, Key, Lock, Password } from "@mui/icons-material"
+import { Avatar, Box, Button, Fab, LinearProgress, TextField, Typography } from "@mui/material"
 import Link from "next/link"
 import toast from "react-hot-toast"
 
@@ -99,16 +99,14 @@ export default function Locker() {
                 >
                     Aceptar
                 </Button>
-                <Link href={`/hash/${email}/locker`}>
-                    <Button
-                        fullWidth
-                        variant="contained"
-                        sx={{ mt: 3, mb: 2 }}
-                    >
-                        Volver
-                    </Button>
-                </Link>
                 {loading && <LinearProgress />}
+            </Box>
+            <Box sx={{ position: 'fixed', bottom: 100 }}>
+                <Link href={`/hash/${email}/locker`} legacyBehavior passHref>
+                    <Fab size="medium" variant="extended" sx={{ m: 1 }}>
+                        <ArrowBack sx={{ mr: 1 }} />Volver
+                    </Fab>
+                </Link>
             </Box>
         </Box >
     )
