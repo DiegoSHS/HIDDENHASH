@@ -1,8 +1,8 @@
+import { StoredContext } from "@/context/context"
+import { Box, Button, Typography } from "@mui/material"
 import { signOut } from "next-auth/react"
 import { useRouter } from "next/router"
 import { useEffect } from "react"
-const { StoredContext } = require("@/context/context")
-const { Box, Button, Avatar, Typography } = require("@mui/material")
 
 const Login = () => {
     const router = useRouter()

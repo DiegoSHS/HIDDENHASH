@@ -1,8 +1,7 @@
-import { CopyAll, Delete, LockOpen, RemoveRedEye, Share } from '@mui/icons-material'
-import { Card, CardActions, CardContent, CardHeader, IconButton, Typography } from '@mui/material'
-import { useState } from 'react'
-import { copy } from './hashTextCard'
-import { StoredContext } from '@/context/context'
+import { StoredContext } from "@/context/context"
+import { CopyAll, Delete, LockOpen, RemoveRedEye, Share } from "@mui/icons-material"
+import { Card, CardActions, CardContent, CardHeader, IconButton, Typography } from "@mui/material"
+import { useState } from "react"
 
 export const LockerCards = ({ lockers }) => {
     if (!lockers || lockers.length === 0) return ('')

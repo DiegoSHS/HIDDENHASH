@@ -1,6 +1,10 @@
 import { Accordion, AccordionDetails, AccordionSummary, Card, CardActions, CardContent, CardHeader, Container, Fab, IconButton, Typography } from "@mui/material"
 import { HashSharedCards } from "./hashTextCard"
 import { CopyAll, Delete, ExpandMore, LockOpen, RemoveRedEye, Send } from "@mui/icons-material"
+import { useState } from "react"
+import { StoredContext } from "@/context/context"
+import { deleteShared } from "@/requests/requests"
+import toast from "react-hot-toast"
 
 export const ShareAccordion = ({ origin, sharedItems, addressee, _id }) => {
     return (
