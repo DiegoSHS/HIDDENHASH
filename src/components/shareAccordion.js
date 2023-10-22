@@ -20,7 +20,7 @@ export const ShareAccordion = ({ origin, sharedItems, addressee, _id }) => {
     )
 }
 
-export const ShareWith = ({ user: { name, email }, selected, addressee, handler }) => {
+export const ShareWith = ({ user: { name, email }, selected, origin, handler }) => {
     return (
         <Card>
             <CardHeader
@@ -28,7 +28,7 @@ export const ShareWith = ({ user: { name, email }, selected, addressee, handler 
                 subheader={email}
                 action={
                     <IconButton onClick={() => {
-                        handler({ origin: email, sharedItems: selected, addressee: addressee })
+                        handler({ origin: origin, sharedItems: selected, addressee: email })
                     }}>
                         <Send />
                     </IconButton>

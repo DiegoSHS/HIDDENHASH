@@ -111,7 +111,7 @@ export default function ShareItems({ items: { fuser, hashes } }) {
             {storedUsers.length !== 0 ?
               (storedUsers.map((e, i) => {
                 return (
-                  <ShareWith user={e} selected={selected} handler={handleShare} addressee={user.email} key={i} />
+                  <ShareWith user={e} selected={selected} handler={handleShare} origin={user.email} key={i} />
                 )
               })) :
               (<Typography>No hay nadie con quien copartir aún</Typography>)}
