@@ -9,7 +9,6 @@ export default async function HandleIndex(req, res) {
             case 'POST':
                 const { addressee, origin, _id } = body
                 const result = await collection.updateOne({ addressee, origin }, { $pull: { sharedItems: new ObjectId(_id) } })
-                console.log('are', result)
                 return res.status(200).json(result)
             default:
                 return res.status(405).json({ error: { code: 405, message: 'Method not allowed' } })
