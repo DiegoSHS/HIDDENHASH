@@ -1,5 +1,5 @@
 import { StoredContext } from "@/context/context"
-import { sendDecrypt } from "@/requests/requests"
+import { handleShare, sendDecrypt } from "@/requests/requests"
 import toast from "react-hot-toast"
 import { copy } from "./hashTextCard"
 import { Button, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, TextField, Typography } from "@mui/material"
@@ -117,7 +117,7 @@ export const DeleteDialog = () => {
 }
 
 export const ShareDialog = () => {
-    const { memory: { shareDialog, selectedLocker, storedUsers } } = StoredContext()
+    const { memory: { shareDialog, selectedLocker, storedUsers, user: { email } } } = StoredContext()
     const handleClose = () => {
         setStored({ shareDialog: false })
     }
