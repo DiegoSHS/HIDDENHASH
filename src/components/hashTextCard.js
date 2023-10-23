@@ -87,6 +87,7 @@ export const HashSharedCards = ({ hashes, shareInfo }) => {
 }
 
 export const HashSharedCard = ({ element: { hash, algorithm, original, _id }, shareInfo: { addressee, origin }, stateFn }) => {
+    const [deleted, setDeleted] = useState(false)
     const handleDelete = () => {
         toast.promise(deleteShared({ addressee, origin, _id }), {
             error: `Error al solicitar eliminación`,
@@ -94,7 +95,8 @@ export const HashSharedCard = ({ element: { hash, algorithm, original, _id }, sh
                 if (data.error) {
                     return `Error en el servidor`
                 }
-                stateFn((state) => state.map(e => e._id !== _id))
+                stateFn((state) => [...state.map(e => e._id !== _id)])
+                setDeleted(true)
                 return 'Eliminado de compartidos'
             },
             loading: 'Eliminando'
@@ -103,24 +105,27 @@ export const HashSharedCard = ({ element: { hash, algorithm, original, _id }, sh
         })
     }
     return (
-        <Card sx={{ background: 'transparent', minWidth: '30vw', maxWidth: '95vw' }}>
-            <CardHeader
-                title={original}
-                subheader={algorithm}
-            />
-            <CardContent>
-                <Typography sx={{ overflow: 'hidden', maxWidth: '95%' }} variant="body2" color="text.secondary">
-                    {hash}
-                </Typography>
-            </CardContent>
-            <CardActions disableSpacing>
-                <IconButton onClick={handleDelete} aria-label="copiar">
-                    <Delete color="error" />
-                </IconButton>
-                <IconButton onClick={() => { copy(hash) }} aria-label="copiar">
-                    <CopyAll />
-                </IconButton>
-            </CardActions>
-        </Card>
+        deleted ? (<></>) :
+            (
+                <Card sx={{ background: 'transparent', minWidth: '30vw', maxWidth: '95vw' }}>
+                    <CardHeader
+                        title={original}
+                        subheader={algorithm}
+                    />
+                    <CardContent>
+                        <Typography sx={{ overflow: 'hidden', maxWidth: '95%' }} variant="body2" color="text.secondary">
+                            {hash}
+                        </Typography>
+                    </CardContent>
+                    <CardActions disableSpacing>
+                        <IconButton onClick={handleDelete} aria-label="copiar">
+                            <Delete color="error" />
+                        </IconButton>
+                        <IconButton onClick={() => { copy(hash) }} aria-label="copiar">
+                            <CopyAll />
+                        </IconButton>
+                    </CardActions>
+                </Card>
+            )
     )
 }
