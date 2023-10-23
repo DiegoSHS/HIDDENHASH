@@ -24,7 +24,7 @@ export const ShareAccordion = ({ origin, sharedItems, addressee, _id }) => {
     )
 }
 
-export const LockerAccordion = ({ addresse, origin, sharedItems }) => {
+export const LockerAccordion = ({ addressee, origin, sharedItems }) => {
     return (
         <Accordion sx={{ background: 'transparent', minWidth: '30vw', maxWidth: '85vw' }}>
             <AccordionSummary expandIcon={<ExpandMore />} id="sharedFrom">
@@ -33,7 +33,7 @@ export const LockerAccordion = ({ addresse, origin, sharedItems }) => {
             <AccordionDetails>
                 <Container maxWidth='sm'>
                     <LockerSharedCards lockers={sharedItems} shareInfo={{
-                        addresse: addresse,
+                        addressee: addressee,
                         origin: origin
                     }} />
                 </Container>
@@ -52,15 +52,16 @@ export const ShareWith = ({ user: { name, email }, selected, origin, handler }) 
     )
 }
 
-const LockerSharedCards = ({ lockers }) => {
+const LockerSharedCards = ({ lockers, shareInfo }) => {
     const [lockerss, setLockerss] = useState(lockers)
     if (!lockerss || lockerss.length === 0) return (<Typography>Nada compartido</Typography>)
     return (
-        lockerss.map((e, i) => <LockerSharedCard element={e} key={i} stateFn={setLockerss} />)
+        lockerss.map((e, i) => <LockerSharedCard element={e} sharedInfo={shareInfo} key={i} stateFn={setLockerss} />)
     )
 }
 
 const LockerSharedCard = ({ element: { encrypted, name, email, _id }, sharedInfo: { origin, addressee }, stateFn }) => {
+    const [deleted, setDeleted] = useState(false)
     const [visible, setVisible] = useState(true)
     const { setStored } = StoredContext()
     const handleDelete = () => {
@@ -71,6 +72,7 @@ const LockerSharedCard = ({ element: { encrypted, name, email, _id }, sharedInfo
                     return `Error en el servidor`
                 }
                 stateFn((state) => state.map(e => e._id !== _id))
+                setDeleted(true)
                 return 'Eliminado de compartidos'
             },
             loading: 'Eliminando'
@@ -86,30 +88,33 @@ const LockerSharedCard = ({ element: { encrypted, name, email, _id }, sharedInfo
         setStored({ dialog: true })
     }
     return (
-        <Card sx={{ background: 'transparent', minWidth: '30vw', maxWidth: '85vw' }}>
-            <CardHeader
-                title={name}
-                subheader={`Dueño: ${email}`}
-            />
-            <CardContent>
-                <Typography hidden={visible} overflow={'clip'} variant="body2" color="text.secondary">
-                    {encrypted}
-                </Typography>
-            </CardContent>
-            <CardActions disableSpacing>
-                <IconButton aria-label="desbloquear" onClick={handleOpen}>
-                    <LockOpen />
-                </IconButton>
-                <IconButton aria-label="ver encriptado" onClick={handleVisible}>
-                    <RemoveRedEye color={visible ? 'secondary' : 'warning'} />
-                </IconButton>
-                <IconButton disabled={visible} aria-label="copiar" color='info' onClick={() => copy(encrypted)}>
-                    <CopyAll />
-                </IconButton>
-                <IconButton disabled={visible} aria-label="copiar" color='error' onClick={handleDelete}>
-                    <Delete />
-                </IconButton>
-            </CardActions>
-        </Card>
+        deleted ? (<></>) :
+            (
+                <Card sx={{ background: 'transparent', minWidth: '30vw', maxWidth: '85vw' }}>
+                    <CardHeader
+                        title={name}
+                        subheader={`Dueño: ${email}`}
+                    />
+                    <CardContent>
+                        <Typography hidden={visible} overflow={'clip'} variant="body2" color="text.secondary">
+                            {encrypted}
+                        </Typography>
+                    </CardContent>
+                    <CardActions disableSpacing>
+                        <IconButton aria-label="desbloquear" onClick={handleOpen}>
+                            <LockOpen />
+                        </IconButton>
+                        <IconButton aria-label="ver encriptado" onClick={handleVisible}>
+                            <RemoveRedEye color={visible ? 'secondary' : 'warning'} />
+                        </IconButton>
+                        <IconButton disabled={visible} aria-label="copiar" color='info' onClick={() => copy(encrypted)}>
+                            <CopyAll />
+                        </IconButton>
+                        <IconButton disabled={visible} aria-label="copiar" color='error' onClick={handleDelete}>
+                            <Delete />
+                        </IconButton>
+                    </CardActions>
+                </Card>
+            )
     )
 }
