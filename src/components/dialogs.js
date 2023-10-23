@@ -117,7 +117,7 @@ export const DeleteDialog = () => {
 }
 
 export const ShareDialog = () => {
-    const { memory: { shareDialog, selectedLocker, storedUsers, user: { email } } } = StoredContext()
+    const { memory: { shareDialog, selectedLocker, storedUsers, user: { email } }, setStored } = StoredContext()
     const handleClose = () => {
         setStored({ shareDialog: false })
     }
@@ -128,7 +128,7 @@ export const ShareDialog = () => {
                 {storedUsers.length !== 0 ?
                     (storedUsers.map((e, i) => {
                         return (
-                            <ShareWith user={e} selected={selectedLocker} handler={handleShare} origin={email} key={i} />
+                            <ShareWith user={e} selected={[selectedLocker]} handler={handleShare} origin={email} key={i} />
                         )
                     })) :
                     (<Typography>No hay nadie con quien copartir aún</Typography>)}
