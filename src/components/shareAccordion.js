@@ -54,7 +54,7 @@ export const ShareWith = ({ user: { name, email }, selected, origin, handler }) 
 
 const LockerSharedCards = ({ lockers }) => {
     const [lockerss, setLockerss] = useState(lockers)
-    if (!lockerss || lockerss.length === 0) return ('')
+    if (!lockerss || lockerss.length === 0) return (<Typography>Nada compartido</Typography>)
     return (
         lockerss.map((e, i) => <LockerSharedCard element={e} key={i} stateFn={setLockerss} />)
     )

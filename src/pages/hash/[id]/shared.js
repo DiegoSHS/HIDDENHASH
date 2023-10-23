@@ -31,6 +31,7 @@ export const getServerSideProps = async ({ query: { id } }) => {
 }
 
 export default function SharedLocker({ lockers }) {
+    console.log(JSON.parse(lockers))
     const { memory: { storedLockers, user: { email } }, setStored } = StoredContext()
     useEffect(() => {
         setStored({ storedLockers: JSON.parse(lockers) })
