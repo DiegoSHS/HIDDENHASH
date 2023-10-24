@@ -18,6 +18,21 @@ const postRequest = async (route, body) => {
     }
 }
 
+const postFileRequest = async (route, FormData) => {
+    try {
+        const res = await fetch(route, {
+            method: 'POST',
+            body: FormData
+        })
+        const data = await res.json()
+        return data
+    } catch (error) {
+        return {
+            error: { code: 500, message: `Error al realizar petición ${error.message}` }
+        }
+    }
+}
+
 const deleteRequest = async (route) => {
     try {
         const res = await fetch(route, {
@@ -78,3 +93,10 @@ export const getSessions = () => getRequest('/api/session')
 export const sendShared = (body) => postRequest('/api/share', body)
 
 export const deleteShared = (body) => postRequest('/api/share/deleteshared', body)
+
+export const sendFile = (file, query) => {
+    const route = Object.entries(query).map(([k, v]) => {
+        return String(v)
+    }).join('W')
+    return postFileRequest(`/api/sendfile/${route}`, file)
+}
