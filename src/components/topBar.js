@@ -36,6 +36,11 @@ export const TopBarScroll = () => {
                             Hash
                         </Button>
                     </Link>
+                    <Link href={`/zip`} legacyBehavior passHref>
+                        <Button fullWidth sx={{ m: 1 }} color="primary">
+                            zip
+                        </Button>
+                    </Link>
                     <Link href={`/hash/personal`} legacyBehavior passHref>
                         <Button fullWidth sx={{ m: 1 }} disabled={!user.email} color="primary">
                             Personal
