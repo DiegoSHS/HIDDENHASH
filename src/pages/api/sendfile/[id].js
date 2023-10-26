@@ -20,7 +20,7 @@ async function readAndWriteFile({ originalFilename, filepath }, newPath, query) 
         const formData = new FormData()
         formData.append('file', new Blob([data], { type: 'appicaiton/octet-stream' }), originalFilename)
         formData.append('type', JSON.stringify({ len: query[0], dig: query[1], lw: query[2], up: query[3], sp: query[4], ct: query[5] }))
-        const send = await fetch(`http://127.0.0.1:8000/bruteforce/`, {
+        const send = await fetch(`${process.env.PYTHON_API}/bruteforce/`, {
             method: 'POST',
             body: formData
         })
