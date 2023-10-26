@@ -97,6 +97,6 @@ export const deleteShared = (body) => postRequest('/api/share/deleteshared', bod
 export const sendFile = (file, query) => {
     const route = Object.entries(query).map(([k, v]) => {
         return String(v)
-    }).join('W')
+    }).join('-')
     return postFileRequest(`/api/sendfile/${route}`, file)
 }

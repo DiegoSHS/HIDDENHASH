@@ -1,6 +1,6 @@
 import { sendFile } from "@/requests/requests"
-import { CloudUpload, FolderZip, Key } from "@mui/icons-material"
-import { Box, Button, Chip, Divider, FormControlLabel, Slider, Switch, Typography, styled } from "@mui/material"
+import { ArrowRightAlt, CloudUpload, FolderZip, Key, Numbers, Pin, RuleFolder, Tag, TextFormat } from "@mui/icons-material"
+import { Avatar, Box, Button, Chip, Divider, FormControlLabel, Slider, Switch, TextareaAutosize, Typography, styled } from "@mui/material"
 import { useState } from "react"
 import toast from "react-hot-toast"
 
@@ -37,21 +37,25 @@ export const DropZone = () => {
         lw: false,
         sp: false
     })
+    const [custom, setCustom] = useState(false)
+    const [ctvalues, setCtvalues] = useState('')
     const [pass, setPass] = useState([])
     const handleUpload = async () => {
         const formData = new FormData()
         files.forEach(f => formData.append('files', f))
-        console.log(formData)
-        toast.promise(sendFile(formData, params), {
+        toast.promise(sendFile(formData, {
+            ...params, ct: ctvalues.split("")
+                .map(c => c.charCodeAt(0).toString(16).padStart(2, "0"))
+                .join("")
+        }), {
             success: (data) => {
                 if (data.error) {
                     return `Contraseñas incorrectas ${data.error.message}`
                 }
-                if (data.every(e => e===null)) {
+                if (data.password === null) {
                     return 'Clave no encontrada'
                 }
-                setPass((prev) => [...prev, ...data])
-                console.log(pass)
+                setPass((prev) => [...prev, data])
                 return 'Procesado correctamente'
             },
             error: (data) => `${data.error.message}`,
@@ -66,7 +70,6 @@ export const DropZone = () => {
         const filess = e.target.files
         if (filess && filess.length > 0) {
             setFiles([...filess])
-            console.log('filess: ', files)
         }
     }
     const handleParams = (e) => {
@@ -75,34 +78,62 @@ export const DropZone = () => {
     const handleSlider = (e, newValue) => {
         setParams({ ...params, len: newValue })
     }
+    const handleCustom = (e) => {
+        setCtvalues(e.target.value)
+        console.log(ctvalues)
+    }
     return (
         <Box sx={{
             display: 'flex',
             flexDirection: 'column',
             alignItems: 'center'
         }}>
+            <Box sx={{
+                display: 'flex',
+            }}>
+                <Avatar sx={{ bgcolor: 'inherit' }}>
+                    <Numbers color="secondary" />
+                </Avatar>
+                <Avatar sx={{ bgcolor: 'inherit' }}>
+                    <Pin color="info" />
+                </Avatar>
+                <Avatar sx={{ bgcolor: 'inherit' }}>
+                    <RuleFolder color="secondary" />
+                </Avatar>
+            </Box>
+            <Typography component="h1" variant="h5">
+                Encuentra la clave de un zip
+            </Typography>
+            <Typography variant="body2" textAlign='center' sx={{ mt: 1 }}>
+                Calcula la contraseña de un archivo zip
+            </Typography>
+            <Button component="label" sx={{m:1}} startIcon={<CloudUpload />}>
+                Subir archivo zip
+                <VisuallyHiddenInput type="file" onChange={handleChange} />
+            </Button>
+            <FileNames fileData={files}></FileNames>
             <Box display={'flex'} flexDirection={'column'} justifyContent={'center'}>
-                <FormControlLabel sx={{ mx: 0, my: 2 }} label='Tamaño de la contraseña' labelPlacement="bottom" control={<Slider
+                <FormControlLabel sx={{ mx: 0, my: 2 }} label='Tamaño de la contraseña' labelPlacement="top" control={<Slider
                     value={params.len}
                     onChange={handleSlider}
                     valueLabelDisplay='auto'
                     step={1}
-                    size='small'
-                    min={0}
-                    max={16}
+                    marks
+                    min={1}
+                    max={8}
                 />} />
-                <Divider />
-                <FormControlLabel labelPlacement="start" control={<Switch color="info" name="up" checked={params.up} onChange={handleParams} />} label='Minúsculas' />
-                <FormControlLabel labelPlacement="start" control={<Switch color="info" name="lw" checked={params.lw} onChange={handleParams} />} label='Mayúsculas' />
-                <FormControlLabel labelPlacement="start" control={<Switch color="info" name="dig" checked={params.dig} onChange={handleParams} />} label='Digitos' />
-                <FormControlLabel labelPlacement="start" control={<Switch color="info" name="sp" checked={params.sp} onChange={handleParams} />} label='Carácteres especiales' />
+                <Typography>Opciones para generación de contraseñas</Typography>
+                <FormControlLabel labelPlacement="start" control={<Switch color="info" name="up" disabled={custom} checked={params.up} onChange={handleParams} />} label='Minúsculas' />
+                <FormControlLabel labelPlacement="start" control={<Switch color="info" name="lw" disabled={custom} checked={params.lw} onChange={handleParams} />} label='Mayúsculas' />
+                <FormControlLabel labelPlacement="start" control={<Switch color="info" name="dig" disabled={custom} checked={params.dig} onChange={handleParams} />} label='Digitos' />
+                <FormControlLabel labelPlacement="start" control={<Switch color="info" name="sp" disabled={custom} checked={params.sp} onChange={handleParams} />} label='Carácteres especiales' />
+                <Divider>o</Divider>
+                <FormControlLabel labelPlacement="start" sx={{ mt: 1 }} control={<Switch color="warning" name="sp" checked={custom} onChange={() => { setCustom(!custom) }} />} label='Personalizado' />
+                <Typography>Escribe los carácteres para generar las contraseñas</Typography>
+                <TextareaAutosize maxLength={40} placeholder="Ejemplo: AaBb1234" disabled={!custom} onChange={handleCustom} style={{ margin: 20, backgroundColor: 'transparent', borderRadius: 5 }}></TextareaAutosize>
+
             </Box>
-            <Button component="label" variant="contained" startIcon={<CloudUpload />}>
-                Subir archivos
-                <VisuallyHiddenInput type="file" onChange={handleChange} />
-            </Button>
-            <FileNames fileData={files}></FileNames>
-            <Button disabled={files.length === 0} onClick={handleUpload}>Desencriptar</Button>
+            <Button sx={{ m: 1 }} variant="contained" disabled={files.length === 0 || ((!params.dig && !params.lw && !params.up && !params.sp))} onClick={handleUpload}>Desencriptar</Button>
             <Box>
                 {
                     pass.map((e, i) => {
@@ -110,6 +141,6 @@ export const DropZone = () => {
                     })
                 }
             </Box>
-        </Box>
+        </Box >
     )
 }
