@@ -1,5 +1,5 @@
 import { Apple, Duo, GitHub, Google } from '@mui/icons-material'
-import { Box, Button, Divider, Typography } from '@mui/material'
+import { Box, Button, IconButton, Typography } from '@mui/material'
 import Link from "next/link"
 
 export default function Home() {
@@ -24,14 +24,31 @@ export default function Home() {
         </Link>
       </Box>
       <Box>
-        <Divider />
-        <Typography variant='h4' align='center' letterSpacing={2}>
+        <Typography variant='h4' align='center' letterSpacing={2} sx={{ mt: 5 }}>
           Quienes confian en nosotros (no en verdad)
         </Typography>
-        <Google></Google>
-        <Apple></Apple>
-        <Duo></Duo>
-        <GitHub></GitHub>
+        <Box alignItems={'center'} display={'flex'} alignContent={'center'}>
+          <Link legacyBehavior href={'https://google.com/'} passHref>
+            <IconButton>
+              <Google></Google>
+            </IconButton>
+          </Link>
+          <Link href={'https://apple.com/'} passHref legacyBehavior>
+            <IconButton>
+              <Apple></Apple>
+            </IconButton>
+          </Link>
+          <Link href={'https://duo.google.com/'} passHref legacyBehavior>
+            <IconButton>
+              <Duo></Duo>
+            </IconButton>
+          </Link>
+          <Link href={'https://github.com/'} passHref legacyBehavior>
+            <IconButton>
+              <GitHub></GitHub>
+            </IconButton>
+          </Link>
+        </Box>
       </Box>
     </Box>
   )
