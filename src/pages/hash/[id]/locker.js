@@ -6,7 +6,7 @@ import { connex } from "@/models/connector"
 import { getlockers } from "@/models/transactions"
 import { getSessions } from "@/requests/requests"
 import { Add, ArrowBack, Inbox, Key, Lock, Password } from "@mui/icons-material"
-import { Avatar, Box, Container, Fab, Typography } from "@mui/material"
+import { Avatar, Box, Breadcrumbs, Container, Fab, Typography } from "@mui/material"
 import Link from "next/link"
 import { useEffect } from "react"
 
@@ -56,6 +56,12 @@ export default function Locker({ lockers }) {
                     <Lock color="warning" />
                 </Avatar>
             </Box>
+            <Breadcrumbs aria-label="breadcrumb">
+                <Link underline="hover" color="inherit" href="/hash/personal">
+                    Personal
+                </Link>
+                <Typography color="text.primary">Lockers</Typography>
+            </Breadcrumbs>
             <Typography component="h1" variant="h5">
                 Mis lockers
             </Typography>

@@ -4,7 +4,7 @@ import { StoredContext } from "@/context/context"
 import { connex } from "@/models/connector"
 import { getlockers } from "@/models/transactions"
 import { Add, ArrowBack, Inbox, Share } from "@mui/icons-material"
-import { Box, Button, Container, Fab } from "@mui/material"
+import { Box, Breadcrumbs, Button, Container, Fab, Typography } from "@mui/material"
 import Link from "next/link"
 import { useEffect } from "react"
 
@@ -30,6 +30,12 @@ export default function Hashes({ hashes }) {
                 flexDirection: 'column',
                 alignItems: 'center'
             }}>
+                <Breadcrumbs aria-label="breadcrumb">
+                    <Link underline="hover" color="inherit" href="/hash/personal">
+                        Personal
+                    </Link>
+                    <Typography color="text.primary">Hashes</Typography>
+                </Breadcrumbs>
                 <Box sx={{ position: 'fixed', bottom: 100 }}>
                     <Link href={`/hash/personal`} passHref legacyBehavior>
                         <Fab sx={{ m: 1 }} size="medium">

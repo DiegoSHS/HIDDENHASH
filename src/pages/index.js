@@ -6,8 +6,14 @@ export default function Home() {
   return (
     <Box sx={{ my: 10 }} alignItems={'center'} display={'flex'} flexDirection={'column'} alignContent={'center'}>
       <Typography variant="h2" fontWeight={600} align="center" letterSpacing={3}>
-        Una app para encriptar textos y guardarlos
+        Una app para
       </Typography>
+      <Box display={'flex'}>
+        <Typography variant="h2" fontWeight={600} align="center" letterSpacing={3} color={'Orange'}>
+          encriptar textos
+        </Typography>
+      </Box>
+      <Typography variant="h2" fontWeight={600} align="center" letterSpacing={3}>y guardarlos</Typography>
       <Typography align="center" sx={{ mt: 5 }}>
         en esta web podrás encriptar los textos que quieras y también podrás guardarlos, esta web puede hacer hashes con la mayoria de algoritmos disponibles en openssl
       </Typography>
@@ -24,8 +30,8 @@ export default function Home() {
         </Link>
       </Box>
       <Box>
-        <Typography variant='h4' align='center' letterSpacing={2} sx={{ mt: 5 }}>
-          Quienes confian en nosotros (no en verdad)
+        <Typography variant='h4' fontWeight={600} align='center' letterSpacing={2} sx={{ mt: 5 }}>
+          Sponsors (no en verdad)
         </Typography>
         <Box alignItems={'center'} display={'flex'} alignContent={'center'}>
           <Link legacyBehavior href={'https://google.com/'} passHref>
