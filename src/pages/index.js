@@ -88,7 +88,7 @@ export default function Home() {
               <Typography variant="body2">
                 El proyecto es genial y sigue mejorando.
                 <Typography color={'orange'}>
-                  "Increible de inicio a fin"
+                  {'"Increible de inicio a fin"'}
                 </Typography>
               </Typography>
             </CardContent>
@@ -104,7 +104,7 @@ export default function Home() {
               <Typography variant="body2">
                 Todo bien pero falta el algoritmo sm3.
                 <Typography color={'orange'}>
-                  "Todos los algoritmos"
+                  {'"Todos los algoritmos"'}
                 </Typography>
               </Typography>
             </CardContent>
