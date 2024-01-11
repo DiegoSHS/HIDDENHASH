@@ -1,8 +1,9 @@
 import { StoredContext } from "@/context/context"
-import { AccountCircle } from "@mui/icons-material"
-import { AppBar, Avatar, Button, Chip, Container, IconButton, Toolbar } from "@mui/material"
+import { AccountCircle, MoreVert } from "@mui/icons-material"
+import { AppBar, Avatar, Button, Chip, Container, IconButton, Menu, MenuItem, Toolbar } from "@mui/material"
 import { signIn } from "next-auth/react"
 import Link from "next/link"
+import { useState } from "react"
 
 const AccountButton = ({ user }) => {
     return (!user.name ? (
@@ -22,6 +23,13 @@ const AccountButton = ({ user }) => {
 
 export const TopBarScroll = () => {
     const { memory: { user } } = StoredContext()
+    const [anchorEl, setAnchorEl] = useState(null)
+    const handleMenu = (e) => {
+        setAnchorEl(e.currentTarget)
+    }
+    const handleClose = () => {
+        setAnchorEl(null)
+    }
     return (
         <AppBar sx={{ backgroundColor: 'transparent', background: '000000', backdropFilter: 'blur(10px)', boxShadow: 0 }}>
             <Container maxWidth='sm'>
@@ -46,6 +54,43 @@ export const TopBarScroll = () => {
                             Personal
                         </Button>
                     </Link>
+                    <div>
+                        <IconButton
+                            aria-label="account of current user"
+                            aria-controls="menu-appbar"
+                            aria-haspopup="true"
+                            onClick={handleMenu}
+                            color="inherit"
+                        >
+                            <MoreVert></MoreVert>
+                        </IconButton>
+                        <Menu
+                            id="menu-appbar"
+                            anchorEl={anchorEl}
+                            anchorOrigin={{
+                                vertical: 'top',
+                                horizontal: 'right',
+                            }}
+                            keepMounted
+                            transformOrigin={{
+                                vertical: 'top',
+                                horizontal: 'right',
+                            }}
+                            open={Boolean(anchorEl)}
+                            onClose={handleClose}
+                        >
+                            <Link href={`/contact`} legacyBehavior passHref>
+                                <MenuItem>
+                                    Contacto
+                                </MenuItem>
+                            </Link>
+                            <Link href={`/about`} legacyBehavior passHref>
+                                <MenuItem>
+                                    Nosotros
+                                </MenuItem>
+                            </Link>
+                        </Menu>
+                    </div>
                     <AccountButton user={user} />
                 </Toolbar>
             </Container>
