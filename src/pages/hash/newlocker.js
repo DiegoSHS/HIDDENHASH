@@ -1,7 +1,7 @@
 import { StoredContext } from "@/context/context"
 import { sendEncrypt } from "@/requests/requests"
 import { ArrowBack, Key, Lock, Password } from "@mui/icons-material"
-import { Avatar, Box, Button, Fab, LinearProgress, TextField, Typography } from "@mui/material"
+import { Avatar, Box, Breadcrumbs, Button, Fab, LinearProgress, TextField, Typography } from "@mui/material"
 import Link from "next/link"
 import toast from "react-hot-toast"
 
@@ -52,6 +52,12 @@ export default function Locker() {
             <Typography variant="body2" color='warning.main'>
                 ¡No la olvides!
             </Typography>
+            <Breadcrumbs aria-label="breadcrumb">
+                <Link underline="hover" color="inherit" href="/hash/personal">
+                    Personal
+                </Link>
+                <Typography color="text.primary">Breadcrumbs</Typography>
+            </Breadcrumbs>
             <Box component="form" onChange={handleChange} noValidate sx={{ mt: 1 }}>
                 <TextField
                     defaultValue={name}
