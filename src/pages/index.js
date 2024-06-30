@@ -6,15 +6,15 @@ import Link from "next/link"
 export default function Home() {
   return (
     <Box sx={{ my: 10 }} alignItems={'center'} display={'flex'} flexDirection={'column'} alignContent={'center'}>
-      <Typography variant="h2" fontWeight={600} align="center" letterSpacing={3}>
+      <Typography variant="h2" className='text-4xl sm:text-6xl' fontWeight={600} align="center" letterSpacing={3}>
         Una app para
       </Typography>
       <Box display={'flex'}>
-        <Typography variant="h2" fontWeight={600} align="center" letterSpacing={3} color={'Orange'}>
+        <Typography variant="h2" className='text-4xl sm:text-6xl' fontWeight={600} align="center" letterSpacing={3} color={'Orange'}>
           encriptar textos
         </Typography>
       </Box>
-      <Typography variant="h2" fontWeight={600} align="center" letterSpacing={3}>y guardarlos</Typography>
+      <Typography variant="h2" className='text-4xl sm:text-6xl' fontWeight={600} align="center" letterSpacing={3}>y guardarlos</Typography>
       <Typography align="center" sx={{ mt: 5 }}>
         en esta web podrás encriptar los textos que quieras y también podrás guardarlos, esta web puede hacer hashes con la mayoria de algoritmos disponibles en openssl
       </Typography>
@@ -31,8 +31,11 @@ export default function Home() {
         </Link>
       </Box>
       <Box>
-        <Typography variant='h4' fontWeight={600} align='center' letterSpacing={2} sx={{ my: 2 }}>
+        <Typography variant='h4' fontWeight={600} align='center' letterSpacing={3} sx={{ my: 2 }}>
           Sponsors
+        </Typography>
+        <Typography align='center' sx={{ my: 2 }}>
+          Esto es broma, no tenemos sponsors, lo hacemos por el amor al arte
         </Typography>
         <Box alignItems={'center'} display={'flex'} alignContent={'center'}>
           <Link legacyBehavior href={'https://google.com/'} passHref>
@@ -73,7 +76,7 @@ export default function Home() {
         </Box>
       </Box>
       <Box>
-        <Typography variant='h4' fontWeight={600} align='center' letterSpacing={2} sx={{ my: 2 }}>
+        <Typography variant='h4' fontWeight={600} align='center' letterSpacing={3} sx={{ my: 2 }}>
           Opiniones
         </Typography>
         <Box display={'flex'} flexDirection={'row'} alignContent={'center'} alignItems={'center'}>

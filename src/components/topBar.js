@@ -44,16 +44,18 @@ export const TopBarScroll = () => {
                             Hash
                         </Button>
                     </Link>
-                    <Link href={`/zip`} legacyBehavior passHref>
-                        <Button fullWidth sx={{ m: 1 }} color="primary">
-                            zip
-                        </Button>
-                    </Link>
-                    <Link href={`/hash/personal`} legacyBehavior passHref>
-                        <Button fullWidth sx={{ m: 1 }} disabled={!user.email} color="primary">
-                            Personal
-                        </Button>
-                    </Link>
+                    <div className="sm:flex hidden">
+                        <Link href={`/zip`} legacyBehavior passHref>
+                            <Button fullWidth sx={{ m: 1 }} color="primary">
+                                zip
+                            </Button>
+                        </Link>
+                        <Link href={`/hash/personal`} legacyBehavior passHref>
+                            <Button fullWidth sx={{ m: 1 }} disabled={!user.email} color="primary">
+                                Personal
+                            </Button>
+                        </Link>
+                    </div>
                     <div>
                         <IconButton
                             aria-label="account of current user"
@@ -79,6 +81,18 @@ export const TopBarScroll = () => {
                             open={Boolean(anchorEl)}
                             onClose={handleClose}
                         >
+                            <div className="sm:hidden flex flex-col">
+                                <Link href={`/hash/personal`} legacyBehavior passHref>
+                                    <MenuItem>
+                                        Personal
+                                    </MenuItem>
+                                </Link>
+                                <Link href={`/zip`} legacyBehavior passHref>
+                                    <MenuItem>
+                                        Desencriptar zip
+                                    </MenuItem>
+                                </Link>
+                            </div>
                             <Link href={`/contact`} legacyBehavior passHref>
                                 <MenuItem>
                                     Contacto
