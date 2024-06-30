@@ -1,6 +1,6 @@
 import { sendFile } from "@/requests/requests"
 import { ArrowRightAlt, CloudUpload, FolderZip, Key, Numbers, Pin, RuleFolder, Tag, TextFormat } from "@mui/icons-material"
-import { Avatar, Box, Button, Chip, Divider, FormControlLabel, Slider, Switch, TextareaAutosize, Typography, styled } from "@mui/material"
+import { Avatar, Box, Button, Chip, Divider, FormControlLabel, Slider, Switch, TextField, TextareaAutosize, Typography, styled } from "@mui/material"
 import { useState } from "react"
 import toast from "react-hot-toast"
 
@@ -130,7 +130,7 @@ export const DropZone = () => {
                 <Divider>o</Divider>
                 <FormControlLabel labelPlacement="start" sx={{ mt: 1 }} control={<Switch color="warning" name="sp" checked={custom} onChange={() => { setCustom(!custom) }} />} label='Personalizado' />
                 <Typography>Escribe los carácteres para generar las contraseñas</Typography>
-                <TextareaAutosize maxLength={40} placeholder="Ejemplo: AaBb1234" disabled={!custom} onChange={handleCustom} style={{ margin: 20, backgroundColor: 'transparent', borderRadius: 5 }}></TextareaAutosize>
+                <TextField maxRows={3} minRows={1} maxLength={40} label='Texto personalizado' placeholder="Ejemplo: AaBb1234" disabled={!custom} onChange={handleCustom} style={{ margin: 20, backgroundColor: 'transparent', borderRadius: 5 }}></TextField>
 
             </Box>
             <Button sx={{ m: 1 }} variant="contained" disabled={files.length === 0 || ((!params.dig && !params.lw && !params.up && !params.sp))} onClick={handleUpload}>Desencriptar</Button>
